@@ -1,0 +1,62 @@
+Description: 
+ Patch is applied to fix several build issues
+Author: Jaromír Mikeš <mira.mikes@seznam.cz>
+Author: Dennis Braun <d_braun@kabelmail.de>
+Last-Update: 2020-08-10
+Forwarded: no
+
+Index: zita-alsa-pcmi/source/Makefile
+===================================================================
+--- zita-alsa-pcmi.orig/source/Makefile
++++ zita-alsa-pcmi/source/Makefile
+@@ -31,7 +31,6 @@ VERSION = $(MAJVERS).$(MINVERS)
+ 
+ CPPFLAGS += -DVERSION=\"$(VERSION)\" -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS
+ CXXFLAGS += -O2 -Wall -fPIC
+-CXXFLAGS += -march=native
+ LDLFAGS +=
+ LDLIBS +=
+ 
+@@ -45,7 +44,7 @@ ZITA-ALSA-PCMI_H = zita-alsa-pcmi.h
+ 
+ 
+ $(ZITA-ALSA-PCMI_MIN): $(ZITA-ALSA-PCMI_O)
+-	$(CXX) -shared $(LDFLAGS) -Wl,-soname,$(ZITA-ALSA-PCMI_MAJ) -o $(ZITA-ALSA-PCMI_MIN) $(ZITA-ALSA-PCMI_O) $(ZITA-ALSA-PCMI_DEP)
++	$(CXX) $(LDFLAGS) -shared -Wl,-soname,$(ZITA-ALSA-PCMI_MAJ) -o $(ZITA-ALSA-PCMI_MIN) $(ZITA-ALSA-PCMI_O) $(ZITA-ALSA-PCMI_DEP)
+ 
+ 
+ install:	$(ZITA-ALSA-PCMI_MIN)
+@@ -53,8 +52,8 @@ install:	$(ZITA-ALSA-PCMI_MIN)
+ 	install -d $(DESTDIR)$(LIBDIR)
+ 	install -m 644 $(ZITA-ALSA-PCMI_H) $(DESTDIR)$(INCDIR)
+ 	install -m 755 $(ZITA-ALSA-PCMI_MIN) $(DESTDIR)$(LIBDIR)
+-	ldconfig
+-	ln -sf $(ZITA-ALSA-PCMI_MIN) $(DESTDIR)$(LIBDIR)/$(ZITA-ALSA-PCMI_SO)
++	ln -sf $(ZITA-ALSA-PCMI_MIN) $(DESTDIR)$(LIBDIR)/$(ZITA-ALSA-PCMI_MAJ)
++	ln -sf $(ZITA-ALSA-PCMI_MAJ) $(DESTDIR)$(LIBDIR)/$(ZITA-ALSA-PCMI_SO)
+ 
+ uninstall:
+ 	rm -rf $(DESTDIR)$(INCDIR)/$(ZITA-ALSA-PCMI_H)
+Index: zita-alsa-pcmi/apps/Makefile
+===================================================================
+--- zita-alsa-pcmi.orig/apps/Makefile
++++ zita-alsa-pcmi/apps/Makefile
+@@ -48,14 +48,14 @@ $(ALSA_DELAY_O):
+ 
+ 
+ install:	all
+-	install -d $(BINDIR)
+-	install -m 755 alsa_loopback  $(DESTDIR)$(BINDIR)
+-	install -m 755 alsa_delay     $(DESTDIR)$(BINDIR)
++	install -d $(DESTDIR)$(BINDIR)
++	install -m 755 alsa_loopback  $(DESTDIR)$(BINDIR)/alsa_loopback
++	install -m 755 alsa_delay     $(DESTDIR)$(BINDIR)/alsa_delay
+ 
+ 
+ uninstall:
+ 	rm -f $(DESTDIR)$(BINDIR)/alsa_loopback
+-	rm -f $(DESTDIR)$(BINDIR)/bin/alsa_delay
++	rm -f $(DESTDIR)$(BINDIR)/alsa_delay
+ 
+ 
+ clean:

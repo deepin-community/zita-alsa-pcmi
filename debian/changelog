@@ -1,0 +1,108 @@
+zita-alsa-pcmi (0.3.2-2) unstable; urgency=medium
+
+  [ Helmut Grohne ]
+  * Fix FTCBFS: Let dh_auto_build pass cross tools to make.
+    (Closes: #950750)
+
+  [ Dennis Braun ]
+  * Add me as uploader
+  * Bump dh-compat to 13
+  * Refresh patchset
+  * Fix zita-alsa-pcmi-utils installation
+  * Add libzita-alsa-pcmi-dev as B-D for the symbols
+  * d/rules: Remove -Wl,--as-needed ldflags
+
+ -- Dennis Braun <d_braun@kabelmail.de>  Mon, 10 Aug 2020 18:13:22 +0200
+
+zita-alsa-pcmi (0.3.2-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Felipe Sateler ]
+  * Change maintainer address to debian-multimedia@lists.debian.org
+
+  [ Ondřej Nový ]
+  * Use debhelper-compat instead of debian/compat
+  * d/control: Set Vcs-* to salsa.debian.org
+  * d/copyright: Use https protocol in Format field
+
+  [ Dennis Braun ]
+  * New upstream version 0.3.2
+  * d/control:
+    + Bump dh-compat to 12
+    + Bump Standards-Version to 4.5.0
+    + Set RRR: no
+    + Use https protocol for homepage
+  * d/copyright: Update year, http > https & add myself
+  * d/patches: Update patchset
+  * d/rules: Replace libs/ with source/
+  * d/source/local-options: Drop, obsolete
+  * d/watch: Use https protocol
+  * Fix zita-alsa-pcmi-utils.install
+
+ -- Dennis Braun <d_braun@kabelmail.de>  Mon, 03 Feb 2020 20:36:38 +0100
+
+zita-alsa-pcmi (0.2.0-4) unstable; urgency=medium
+
+  * Set dh/compat 10.
+  * Update copyright file.
+  * Sign tags.
+  * Fix VCS fields.
+  * Bump Standards.
+  * Fix hardening.
+  * Avoid useless linking.
+  * Remove unused substitution variable.
+  * Add spelling patch.
+
+ -- Jaromír Mikeš <mira.mikes@seznam.cz>  Tue, 27 Dec 2016 12:03:32 +0100
+
+zita-alsa-pcmi (0.2.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Remove myself from the Uploaders field.
+
+ -- Alessio Treglia <alessio@debian.org>  Tue, 01 Nov 2016 18:44:57 +0000
+
+zita-alsa-pcmi (0.2.0-2) unstable; urgency=low
+
+  [ Alessio Treglia ]
+  * Add symbols file, don't use static shlibs anymore.
+
+  [ IOhannes m zmoelnig ]
+  * Adding manpages (Closes: #716677)
+  * Fix usage-message of sample-applications.
+  * Use canonical Vcs-* stanzas.
+
+  [ Jaromír Mikeš ]
+  * Removed DMUA.
+  * Bump Standards.
+  * Added local-options file.
+
+ -- Jaromír Mikeš <mira.mikes@seznam.cz>  Tue, 06 Aug 2013 10:56:12 +0200
+
+zita-alsa-pcmi (0.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Refresh patches.
+  * Update debian/copyright.
+  * Bump debhelper to 9.
+  * Bump Standards.
+
+ -- Alessio Treglia <alessio@debian.org>  Fri, 23 Mar 2012 12:40:59 +0100
+
+zita-alsa-pcmi (0.1.2-1) unstable; urgency=low
+
+  [ Jaromír Mikeš ]
+  * New upstream release
+
+  [ Alessio Treglia ]
+  * Add DM-Upload-Allowed: yes.
+  * This release should fix FTBFS on most architectures.
+
+ -- Jaromír Mikeš <mira.mikes@seznam.cz>  Mon, 06 Feb 2012 14:34:50 +0100
+
+zita-alsa-pcmi (0.1.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #657861)
+
+ -- Jaromír Mikeš <mira.mikes@seznam.cz>  Sun, 29 Jan 2012 17:29:03 +0100

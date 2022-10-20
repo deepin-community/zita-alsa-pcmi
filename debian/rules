@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export PREFIX=/usr
+export LIBDIR=$(PREFIX)/lib/$(DEB_HOST_MULTIARCH)
+export DESTDIR=$(CURDIR)/debian/tmp
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+%:
+	dh $@ -Smakefile
+
+override_dh_auto_build:
+	dh_auto_build --sourcedirectory=source
+	dh_auto_build --sourcedirectory=apps
+
+override_dh_auto_clean:
+	dh_auto_clean
+	$(MAKE) -C source/ clean
+	$(MAKE) -C apps/ clean
+
+override_dh_auto_install:
+	dh_auto_install
+	$(MAKE) -C source/ DESTDIR=$(DESTDIR) install
+	$(MAKE) -C apps/ DESTDIR=$(DESTDIR) install
+
+override_dh_installchangelogs:
+	dh_installchangelogs README
